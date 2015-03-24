@@ -1,0 +1,103 @@
+@charset "utf-8";
+
+#kapAanvraag{
+	text-align: center;
+}
+
+#kapAanvraag .kap{
+	width: 50%;
+	max-width: 300px;
+}
+
+#kapAanvraag textarea{
+	height: 250px;
+
+}
+
+body{
+	font-family: arial;
+	font-size: 15px;
+	line-height:160%;
+	background: #ddd;
+}
+ 
+#container{
+	width:80%;
+	min-width: 400px;
+	max-width: 1000px;
+	padding: 25px;
+	background: #fff;
+	margin: 100px auto 0 auto;
+	height:100%;
+}
+ 
+h4{
+	margin: 0;
+}
+ 
+ul{
+	padding: 0;
+}
+ 
+ul li{
+	display: inline-block;
+	list-style: none;
+}
+ul li a{
+
+}
+
+.blargh {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	border:1px solid #337fed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:auto;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #1570cd;
+	display: inline-block;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+.blargh:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}
+.blargh:active {
+	position:relative;
+	top:1px;
+}
+
+
+#logo{
+	width:100%;
+	height:auto;
+	text-align: center;
+	background-image:/picuters/logo.gif;
+}
+
+#afspraak{
+	text-align: center;
+}
+
+#afspraak .afpr{
+	width: 50%;
+	max-width: 300px;
+}
+
+#afspraak textarea{
+	height: 250px;
+
+}
