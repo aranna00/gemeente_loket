@@ -32,19 +32,21 @@ $error = array(1=> "niet alles is ingevuld","query is mislukt" )
 		<?php if(!isset($_GET["new"])): ?>
 		<table border=1>
 			<tr>
-				<td>ID</td><td>naam</td><td>vraag</td><td>datum</td>
+				<td>ID</td>
+				<td>naam</td>
+				<td>vraag</td>
+				<td>datum</td>
 			</tr>
 				<?php
 
-					foreach($test as $afspraak){
-						echo "<tr>";
-						echo "<td> $afspraak->ID </td>";
-						echo "<td> $afspraak->USER </td>";
-						echo "<td> $afspraak->REDEN </td>";
-						echo "<td> $afspraak->DATUM </td>";
-						echo "</tr>";
-					}
-				?>
+					foreach($test as $afspraak): ?>
+						<tr>
+						<td><?= $afspraak->ID ?></td>
+						<td><?= $afspraak->USER ?></td>
+						<td><?= $afspraak->REDEN ?></td>
+						<td><?= $afspraak->DATUM ?></td>
+						</tr>
+					<?php endforeach ?>
 		</table>
 		<?php endif; ?>
 		<?php

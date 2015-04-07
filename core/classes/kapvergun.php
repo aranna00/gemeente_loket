@@ -51,7 +51,7 @@ class kapvergun{
 		$query->bindValue(1,$username);
 		$query->bindValue(2,$id);
 		$query->bindValue(3,$COMMENT);
-		if(!$spoed==""){$query->bindValue(4,$spoed);}
+		if($spoed!==""){$query->bindValue(4,$spoed);}
 
 		try{
 			$query->execute();

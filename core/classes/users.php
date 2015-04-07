@@ -110,7 +110,7 @@ class Users{
 				return false;
 			}
 		}
-		catch(PDOException $E){
+		catch(PDOException $e){
 			die($e->getMessage());
 		}
 	}
@@ -125,10 +125,10 @@ class Users{
 		try{
 			$query->execute();
 			$data				= $query->fetch();
-			$stored_password	= $data["password"];
-			$id					= $data["id"];
-			$email_code 		= $data["email_code"];
-			$time 				= $data["time"];
+			$stored_password	= $data->password;
+			$id					= $data->id;
+			$email_code 		= $data->email_code;
+			$time 				= $data->time;
 
 			if($stored_password === hash("sha512" , $password.$email_code.$time,false)){
 				return $id;
