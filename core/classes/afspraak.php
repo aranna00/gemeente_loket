@@ -3,11 +3,20 @@ date_default_timezone_set("Europe/Amsterdam");
 class afspraak{
  
 	private $db;
- 
-	public function __construct($database) {
+
+	/**
+	 * @param \PDO $database
+	 */
+	public function __construct(PDO $database) {
 	    $this->db = $database;
 	}
 
+	/**
+	 * @param $username
+	 * @param $id
+	 *
+	 * @return array|bool|string
+	 */
 	public function checkAfspraak($username,$id){
 		$query = $this->db->prepare("SELECT COUNT(`id`) FROM `afspraken` WHERE `USER`=? and `USER_ID`=?");
 		$query->bindValue(1,$username);
@@ -31,12 +40,22 @@ class afspraak{
 					return $e->getMessage();
 				}
 			}
+			else{
+				return false;
+			}
 		}
 		catch(PDOException $e){
 			return $e->getMessage();
 		}
 	}
 
+	/**
+	 * @param $id
+	 * @param $username
+	 * @param $reden
+	 *
+	 * @return bool
+	 */
 	public function aanvragen($id,$username,$reden){
 
 		$query = $this->db->prepare("INSERT INTO `afspraken` (`USER`, `USER_ID`, `REDEN`,DATUM) VALUES (?,?,?,?)");

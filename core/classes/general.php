@@ -1,9 +1,15 @@
 <?php
 class General{
+	/**
+	 * @return bool
+	 */
 	public function logged_in(){
 		return(isset($_SESSION["id"])) ? true:false;
 	}
 
+	/**
+	 *
+	 */
 	public function logged_in_protect(){
 		if($this->logged_in() === true){
 			header("location: home.php?err=1");
@@ -11,6 +17,9 @@ class General{
 		}
 	}
 
+	/**
+	 *
+	 */
 	public function logged_out_protect(){
 		if ($this->logged_in() === false){
 			header("location: index.php?err=1");
@@ -18,6 +27,11 @@ class General{
 		}
 	}
 
+	/**
+	 * @param $url
+	 *
+	 * @return mixed|string
+	 */
 	function esc_url($url) {
 
 	    if ('' == $url) {
@@ -26,7 +40,7 @@ class General{
 
 	    $url = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $url);
 	    
-	    $strip = array('%0d', '%0a', '%0D', '%0A');
+	    $strip = ['%0d', '%0a', '%0D', '%0A'];
 	    $url = (string) $url;
 	    
 	    $count = 1;

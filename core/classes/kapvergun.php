@@ -3,11 +3,20 @@ date_default_timezone_set("Europe/Amsterdam");
 class kapvergun{
  
 	private $db;
- 
-	public function __construct($database) {
+
+	/**
+	 * @param $database
+	 */
+	public function __construct(PDO $database) {
 	    $this->db = $database;
 	}
- 
+
+	/**
+	 * @param $username
+	 * @param $id
+	 *
+	 * @return string
+	 */
 	public function checkForKap($username,$id) {
 		$query = $this->db->prepare("SELECT COUNT(`id`) FROM `kapvergunning` WHERE `USER` = ? AND `USER_ID`= ?");
 		$query->bindValue(1,$username);
@@ -32,7 +41,9 @@ class kapvergun{
 				catch(PDOException $e){
 					return $e->getMessage();
 				}
-				return $query_2;
+			}
+			else{
+				return false;
 			}
 		}
 
@@ -40,6 +51,15 @@ class kapvergun{
 			return $e->getMessage();
 		}
 	}
+
+	/**
+	 * @param $id
+	 * @param $username
+	 * @param $COMMENT
+	 * @param $spoed
+	 *
+	 * @return bool
+	 */
 	public function aanvragen($id,$username,$COMMENT,$spoed){
 		if($spoed==""){
 			$query = $this->db->prepare("INSERT INTO `kapvergunning` (`USER`, `USER_ID`, `COMMENT`) VALUES (?,?,?)");

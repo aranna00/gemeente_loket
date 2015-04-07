@@ -4,7 +4,7 @@ class Users{
  
 	private $db;
  
-	public function __construct($database) {
+	public function __construct(PDO $database) {
 	    $this->db = $database;
 	}
  
@@ -61,7 +61,7 @@ class Users{
 		$time		= time();
 		$ip			= $_SERVER["REMOTE_ADDR"];
 		$email_code	= sha1($username + microtime());
-		$password	= hash(sha512 , $password.$email_code.$time, false);
+		$password	= hash("sha512" , $password.$email_code.$time, false);
 
 		$query = $this->db->prepare("INSERT INTO `users` (`username`, `password`, `email`, `email_code`, `time`, `ip`, `role`, `confirmed`) VALUES (?,?,?,?,?,?,?,?)");
 
@@ -267,4 +267,3 @@ class Users{
 	    }
 	}
 }
-?>
