@@ -5,7 +5,7 @@ $general_obj->logged_out_protect();
 
 $user		=$users_obj->userdata($_SESSION["id"]);
 $username	=$user->username;
-$test		=$afspraak_obj->checkAfspraak($username,$_SESSION["id"]);
+$test		=$afspraak_obj->checkAfspraak($username,$_SESSION["id"],$user->role);
 $error = array(1=> "niet alles is ingevuld","query is mislukt" )
 ?>
 
@@ -38,7 +38,6 @@ $error = array(1=> "niet alles is ingevuld","query is mislukt" )
 				<td>datum</td>
 			</tr>
 				<?php
-
 					foreach($test as $afspraak): ?>
 						<tr>
 						<td><?= $afspraak->ID ?></td>

@@ -14,38 +14,55 @@ class afspraak{
 	/**
 	 * @param $username
 	 * @param $id
+	 * @param $role
 	 *
 	 * @return array|bool|string
 	 */
-	public function checkAfspraak($username,$id){
-		$query = $this->db->prepare("SELECT COUNT(`id`) FROM `afspraken` WHERE `USER`=? and `USER_ID`=?");
-		$query->bindValue(1,$username);
-		$query->bindValue(2,$id);
+	public function checkAfspraak($username,$id, $role){
+		if($role==="user") {
+			$query = $this->db->prepare("SELECT COUNT(`id`) FROM `afspraken` WHERE `USER`=? AND `USER_ID`=?");
+			$query->bindValue(1, $username);
+			$query->bindValue(2, $id);
 
-		try{
-			$query->execute();
-			$rows = $query->fetchColumn();
+			try {
+				$query->execute();
+				$rows = $query->fetchColumn();
 
-			if($rows>=1){
-				$query_2 = $this->db->prepare("SELECT `ID`, `USER`, `REDEN`, `DATUM` FROM `afspraken` WHERE `USER`=? AND `USER_ID`=?");
-				$query_2->bindValue(1,$username);
-				$query_2->bindValue(2,$id);
+				if ($rows >= 1) {
+					$query_2 = $this->db->prepare("SELECT `ID`, `USER`, `REDEN`, `DATUM` FROM `afspraken` WHERE `USER`=? AND `USER_ID`=?");
+					$query_2->bindValue(1, $username);
+					$query_2->bindValue(2, $id);
 
-				try{
-					$query_2->execute();
-					$data = $query_2->fetchAll();
-					return $data;
-				}
-				catch(PDOException $e){
-					return $e->getMessage();
+					try {
+						$query_2->execute();
+						$data = $query_2->fetchAll();
+
+						return $data;
+					}
+					catch (PDOException $e) {
+						return $e->getMessage();
+					}
+				} else {
+					return false;
 				}
 			}
-			else{
-				return false;
+			catch (PDOException $e) {
+				return $e->getMessage();
 			}
 		}
-		catch(PDOException $e){
-			return $e->getMessage();
+		elseif($role ==="admin"){
+			$query = $this->db->prepare('SELECT `ID`, `USER`, `REDEN`, `DATUM` FROM `afspraken`');
+			try{
+				$query->execute();
+				return $data = $query->fetchAll();
+			}
+			catch(PDOException $e)
+			{
+				return $e;
+			}
+		}
+		else{
+			return false;
 		}
 	}
 
