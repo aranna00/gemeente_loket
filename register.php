@@ -1,13 +1,13 @@
 <?php
 require 'core/init.php';
-$general->logged_in_protect();
+$general_obj->logged_in_protect();
 
 if (isset($_POST['username'])){
 	if(empty($_POST['username']) || empty($_POST['p']) || empty($_POST['email'])){
 		$errors[]="All fields are required.";
 	}
 	else{
-		if($users->user_exists($_POST["username"]) === true){
+		if($users_obj->user_exists($_POST["username"]) === true){
 			$errors[]="That username already exists.";
 		}
 		if(!ctype_alnum($_POST["username"])){
@@ -19,7 +19,7 @@ if (isset($_POST['username'])){
 		if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false){
 			$errors[]="Please enter a valid email address";
 		}
-		else if($users->email_exists($_POST["email"])===true){
+		else if($users_obj->email_exists($_POST["email"])===true){
 			$errors[]="That email already has an account";
 		}
 	}
@@ -29,7 +29,7 @@ if (isset($_POST['username'])){
 		$password	= $_POST["p"];
 		$email 		=htmlentities($_POST["email"]);
 
-		$users->register($username, $password, $email);
+		$users_obj->register($username, $password, $email);
 		header("location: register.php?success");
 		exit();
 	}
@@ -50,7 +50,7 @@ if (isset($_POST['username'])){
 <body>
 	<div id="container">
 		<div id="header"><?php include "header.php" ?></div>
-		<form method="POST" action="<?php echo $general->esc_url($_SERVER['PHP_SELF']); ?>" name="registration_form">
+		<form method="POST" action="<?php echo $general_obj->esc_url($_SERVER['PHP_SELF']); ?>" name="registration_form">
 			<h4>Username:</h4>
 			<input type="text" name="username" id="username" placeholder="Username">
 			<h4>Password:</h4>

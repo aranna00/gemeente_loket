@@ -1,6 +1,6 @@
 <?php
 require "core/init.php";
-$general->logged_in_protect();
+$general_obj->logged_in_protect();
 $err= array(1=> "je moet ingelogd zijn om die pagina te zien","je moet uitgelogd zijn om die pagina te zien komen");
 ?>
 <!doctype html>

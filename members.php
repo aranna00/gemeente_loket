@@ -1,6 +1,6 @@
 <?php
 require "core/init.php";
-$members		=$users->get_users();
+$members		=$users_obj->get_users();
 $member_count	= count($members);
 ?>
 

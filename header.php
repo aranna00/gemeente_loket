@@ -4,8 +4,8 @@
 <div id="menu">
 	<?php
 	if(isset($_SESSION["id"])){
-		$user		=$users->userdata($_SESSION["id"]);
-		$username	=$user["username"];
+		$user		=$users_obj->userdata($_SESSION["id"]);
+		$username	=$user->username;
 	}
 	if(!isset($_SESSION["id"])): ?>
 		<ul>

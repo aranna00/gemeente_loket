@@ -1,9 +1,9 @@
 <?php
 require "core/init.php";
-$general->logged_out_protect();
+$general_obj->logged_out_protect();
 
-$user		=$users->userdata($_SESSION["id"]);
-$username	=$user["username"];
+$user		=$users_obj->userdata($_SESSION["id"]);
+$username	=$user->username;
 
 $responses= array(1=> 	"je aanvraag voor een kapvergunning is succesvol verzonden",
 						"test");

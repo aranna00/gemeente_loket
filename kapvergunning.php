@@ -1,12 +1,12 @@
 <?php
 require "core/init.php";
-$general->logged_out_protect();
+$general_obj->logged_out_protect();
 
 
 
-$user		=$users->userdata($_SESSION["id"]);
-$username	=$user["username"];
-$test = $kapvergun->checkForKap($username,$_SESSION["id"]);
+$user		=$users_obj->userdata($_SESSION["id"]);
+$username	=$user->username;
+$test = $kapvergun_obj->checkForKap($username,$_SESSION["id"]);
 $error=	array(1=> "een van de velden is niet ingevuld","de query is niet goed gegaan");
 ?>
 
@@ -35,17 +35,18 @@ $error=	array(1=> "een van de velden is niet ingevuld","de query is niet goed ge
 			<tr>
 				<td>ID</td><td>naam</td><td>confirmed</td><td>accepted</td><td>comment</td>
 			</tr>
-			<tr>
 				<?php
 
-				for($i=0;$i<(count($test));$i++){
-					for($r=0;$r<(count($test[$i])/2);$r++){
-						echo "<td>".$test[$i][$r]."</td>";
-					}
-					echo "</tr><tr>";
+				foreach($test as $vergunning){
+					echo "<tr>";
+					echo "<td> $vergunning->ID </td>";
+					echo "<td> $vergunning->USER </td>";
+					echo "<td> $vergunning->CONFIRMED </td>";
+					echo "<td> $vergunning->ACCEPTED </td>";
+					echo "<td> $vergunning->COMMENT </td>";
+					echo "</tr>";
 				}
 				?>
-			</tr>
 		</table>
 		<?php endif; ?>
 		<?php

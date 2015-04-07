@@ -92,7 +92,7 @@ INSERT INTO `kapvergunning` (`ID`, `USER`, `USER_ID`, `CONFIRMED`, `ACCEPTED`, `
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `users_obj` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(18) NOT NULL,
   `password` varchar(512) NOT NULL,

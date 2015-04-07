@@ -1,6 +1,6 @@
 <?php
 require "core/init.php";
-$general->logged_in_protect();
+$general_obj->logged_in_protect();
 
 if(empty($_POST) === false){
 	$username = trim($_POST["username"]);
@@ -9,15 +9,15 @@ if(empty($_POST) === false){
 	if (empty($username) === true || empty($password) === true){
 		$errors[] = "sorry, but we need your username and password.";
 	}
-	else if	($users->user_exists($username) === false){
+	else if	($users_obj->user_exists($username) === false){
 		$errors[]="sorry that username doesn\'t exist.";
 	}
-	else if($users->email_confirmed($username)=== false){
+	else if($users_obj->email_confirmed($username)=== false){
 		$errors[]="sorry, but you need to activate your account.
 		Please check your email.";
 	}
 	else{
-		$login = $users->login($username, $password);
+		$login = $users_obj->login($username, $password);
 		if ($login === false){
 			$errors[]="Sorry, that username/password is invalid";
 		}

@@ -7,10 +7,10 @@ require 'classes/general.php';
 require 'classes/kapvergun.php';
 require 'classes/afspraak.php';
 
-$users		= new Users($db);
-$general	= new general();
-$kapvergun 	= new kapvergun($db);
-$afspraak	= new afspraak($db);
+$users_obj		= new Users($db);
+$general_obj	= new general();
+$kapvergun_obj 	= new kapvergun($db);
+$afspraak_obj	= new afspraak($db);
 
 $errors		= array();
 

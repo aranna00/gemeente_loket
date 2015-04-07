@@ -59,7 +59,6 @@ class kapvergun{
 		}
 		catch(PDOException $e){
 			return false;
-			die($e->getMessage());
 		}
 	}
 }

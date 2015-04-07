@@ -1,6 +1,6 @@
 <?php
 require 'core/init.php';
-$general->logged_in_protect();
+$general_obj->logged_in_protect();
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,10 +25,10 @@ $general->logged_in_protect();
 			$email 		=trim($_GET['email']);
 			$email_code =trim($_GET['email_code']);
 
-			if($users->email_exists($email) === false){
+			if($users_obj->email_exists($email) === false){
 				$errors[] = 'Sorry we couldn\'t find that emailadres.';
 			}
-			else if($users->activate($email, $email_code) ===false){
+			else if($users_obj->activate($email, $email_code) ===false){
 				$errors[]="Sorry, we couldn\'t activate your account";
 			}
 

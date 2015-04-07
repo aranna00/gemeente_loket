@@ -1,11 +1,11 @@
 <?php
 require "core/init.php";
-$general->logged_out_protect();
+$general_obj->logged_out_protect();
 
 
-$user		=$users->userdata($_SESSION["id"]);
-$username	=$user["username"];
-$test		=$afspraak->checkAfspraak($username,$_SESSION["id"]);
+$user		=$users_obj->userdata($_SESSION["id"]);
+$username	=$user->username;
+$test		=$afspraak_obj->checkAfspraak($username,$_SESSION["id"]);
 $error = array(1=> "niet alles is ingevuld","query is mislukt" )
 ?>
 
@@ -34,17 +34,17 @@ $error = array(1=> "niet alles is ingevuld","query is mislukt" )
 			<tr>
 				<td>ID</td><td>naam</td><td>vraag</td><td>datum</td>
 			</tr>
-			<tr>
 				<?php
 
-				for($i=0;$i<(count($test));$i++){
-					for($r=0;$r<(count($test[$i])/2);$r++){
-						echo "<td>".$test[$i][$r]."</td>";
+					foreach($test as $afspraak){
+						echo "<tr>";
+						echo "<td> $afspraak->ID </td>";
+						echo "<td> $afspraak->USER </td>";
+						echo "<td> $afspraak->REDEN </td>";
+						echo "<td> $afspraak->DATUM </td>";
+						echo "</tr>";
 					}
-					echo "</tr><tr>";
-				}
 				?>
-			</tr>
 		</table>
 		<?php endif; ?>
 		<?php
