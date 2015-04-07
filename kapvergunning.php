@@ -6,7 +6,7 @@ $general_obj->logged_out_protect();
 
 $user		=$users_obj->userdata($_SESSION["id"]);
 $username	=$user->username;
-$test = $kapvergun_obj->checkForKap($username,$_SESSION["id"]);
+$test = $kapvergun_obj->checkForKap($username,$_SESSION["id"],$user->role);
 $error=	array(1=> "een van de velden is niet ingevuld","de query is niet goed gegaan");
 ?>
 
@@ -36,7 +36,6 @@ $error=	array(1=> "een van de velden is niet ingevuld","de query is niet goed ge
 				<td>ID</td><td>naam</td><td>confirmed</td><td>accepted</td><td>comment</td>
 			</tr>
 				<?php
-
 				foreach($test as $vergunning){
 					echo "<tr>";
 					echo "<td> $vergunning->ID </td>";

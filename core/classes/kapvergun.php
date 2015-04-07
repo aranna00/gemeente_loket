@@ -14,41 +14,58 @@ class kapvergun{
 	/**
 	 * @param $username
 	 * @param $id
+	 * @param $role
 	 *
 	 * @return string
 	 */
-	public function checkForKap($username,$id) {
-		$query = $this->db->prepare("SELECT COUNT(`id`) FROM `kapvergunning` WHERE `USER` = ? AND `USER_ID`= ?");
-		$query->bindValue(1,$username);
-		$query->bindValue(2,$id);
+	public function checkForKap($username,$id,$role) {
+		if($role==="user") {
+			$query = $this->db->prepare("SELECT COUNT(`id`) FROM `kapvergunning` WHERE `USER` = ? AND `USER_ID`= ?");
+			$query->bindValue(1, $username);
+			$query->bindValue(2, $id);
 
-		try{
-			$query->execute();
-			$rows = $query->fetchColumn();
+			try {
+				$query->execute();
+				$rows = $query->fetchColumn();
 
-			if($rows>=1){
-				$query_2 = $this->db->prepare("SELECT `ID`, `USER`, `CONFIRMED`, `ACCEPTED`, `COMMENT` FROM `kapvergunning` WHERE `USER` = ? AND `USER_ID` = ?");
+				if ($rows >= 1) {
+					$query_2 = $this->db->prepare("SELECT `ID`, `USER`, `CONFIRMED`, `ACCEPTED`, `COMMENT` FROM `kapvergunning` WHERE `USER` = ? AND `USER_ID` = ?");
 
-				$query_2->bindValue(1,$username);
-				$query_2->bindValue(2,$id);
+					$query_2->bindValue(1, $username);
+					$query_2->bindValue(2, $id);
 
-				try{
-					$query_2->execute();
-					$data 			=$query_2->fetchAll();
-					return $data;
+					try {
+						$query_2->execute();
+						$data = $query_2->fetchAll();
 
-				}
-				catch(PDOException $e){
-					return $e->getMessage();
+						return $data;
+
+					}
+					catch (PDOException $e) {
+						return $e->getMessage();
+					}
+				} else {
+					return false;
 				}
 			}
-			else{
-				return false;
+
+			catch (PDOException $e) {
+				return $e->getMessage();
 			}
 		}
-
-		catch(PDOException $e){
-			return $e->getMessage();
+		elseif($role ==="admin"){
+			$query = $this->db->prepare('SELECT `ID`, `USER`, `CONFIRMED`, `ACCEPTED`, `COMMENT` FROM `kapvergunning`');
+			try{
+				$query->execute();
+				return $data = $query->fetchAll();
+			}
+			catch(PDOException $e)
+			{
+				return $e;
+			}
+		}
+		else{
+			return false;
 		}
 	}
 
